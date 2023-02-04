@@ -1,5 +1,4 @@
-import RPi.GPIO as GPIO
-from locker import Locker
+from static.locker import Locker
 
 class Lockio:
 
