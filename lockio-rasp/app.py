@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from manage_leds import *
-app = Flask(__name__, static_folder='static', static_url_path='/')
+app = Flask(__name__)
 
 
 def run():
@@ -15,8 +15,8 @@ if __name__ == '__main__':
 # ROUTES
 ########
 @app.route('/')
-def mainMenu():
-    return app.send_static_file('index.html')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/api/rasp/1/led/on')
