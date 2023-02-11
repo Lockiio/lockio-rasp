@@ -1,4 +1,4 @@
-from static.locker import Locker
+from locker import Locker
 
 class Lockio:
 

@@ -1,7 +1,5 @@
-from time import sleep
-
-from static.locker import Locker
-from static.lockio import Lockio
+from locker import Locker
+from lockio import Lockio
 
 red = Locker("red", 14, 15)
 brown = Locker("brown", 18, 23)
@@ -14,13 +12,9 @@ purple = Locker("purple", 5, 6)
 
 lockioProto = Lockio("proto")
 lockioProto.addLockers([red, brown, grey, orange, blue, green, white, purple])
-def testLeds():
-    lockioProto.switchOnGreenAll()
 
 def ledsOn():
     lockioProto.switchOnGreenAll()
 
 def ledsOff():
     lockioProto.switchOffGreenAll()
-
-testLeds()
