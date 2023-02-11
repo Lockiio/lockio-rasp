@@ -2,18 +2,23 @@ import requests
 import const.const as const
 from flask import Flask, render_template
 from manage_leds import *
+
 app = Flask(__name__)
 
 
 def run():
     app.run(debug=True, use_reloader=False, port=8000)
 
+
 # Use to run function at start of flask server
 with app.app_context():
+
+    # Get the status of all lockios from the server
     def getLockiosStatus():
         response = requests.get(const.BACK_URL)
         return response.json()
-        # TODO GET INFO FOR EACH LOCKIOS AND LIGHT THE LEDS WITH THEIR CORRECT STATUS
+
+    # TODO GET INFO FOR EACH LOCKIOS AND LIGHT THE LEDS WITH THEIR CORRECT STATUS
     getLockiosStatus()
     ledsOn()
 
