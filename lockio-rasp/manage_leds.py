@@ -14,7 +14,7 @@ lockioProto = Lockio("proto")
 lockioProto.addLockers([red, brown, grey, orange, blue, green, white, purple])
 
 def ledsOn():
-    lockioProto.switchOnGreenAll()
+    lockioProto.switchOnAll("green")
 
 def ledsOff():
-    lockioProto.switchOffGreenAll()
+    lockioProto.switchOffAll("green")
