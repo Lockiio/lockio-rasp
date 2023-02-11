@@ -1,31 +1,33 @@
-from locker import Locker
+from gpiozero import LED
+from gpiozero.pins.pigpio import PiGPIOFactory
 
 
 class Lockio:
 
-    def __init__(self, id):
+    def __init__(self, id, redGPIOPin, greenGPIOPin):
+        # only needed when testing remotely (when the server is not on raspberry)
+        raspberry = PiGPIOFactory(host='192.168.1.64')
+
         self.id = id
-        self.lockers = []
+        self.greenLED = LED(greenGPIOPin, pin_factory=raspberry)
+        self.redLED = LED(redGPIOPin, pin_factory=raspberry)
 
-    def addLocker(self, locker: Locker):
-        self.lockers.append(locker)
+    def switchOn(self, led):
+        if led == self.greenLED:
+            self.greenLED.on()
+        elif led == self.redLED:
+            self.redLED.on()
 
-    def addLockers(self, lockers):
-        for locker in lockers:
-            self.lockers.append(locker)
+    def switchOff(self, led):
+        if led == self.greenLED:
+            self.greenLED.off()
+        elif led == self.redLED:
+            self.redLED.off()
 
-    def switchOnAll(self, color):
-        if color == "green":
-            for locker in self.lockers:
-                locker.switchOn(locker.greenLED)
-        elif color == "red":
-            for locker in self.lockers:
-                locker.switchOn(locker.redLED)
+    def switchOnAll(self):
+        self.switchOn(self.greenLED)
+        self.switchOn(self.redLED)
 
-    def switchOffAll(self, color):
-        if color == "green":
-            for locker in self.lockers:
-                locker.switchOff(locker.greenLED)
-        elif color == "red":
-            for locker in self.lockers:
-                locker.switchOff(locker.redLED)
+    def switchOffAll(self):
+        self.switchOff(self.greenLED)
+        self.switchOff(self.redLED)
