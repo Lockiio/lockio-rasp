@@ -3,11 +3,11 @@ import const.const as const
 from flask import Flask, render_template
 from manage_leds import *
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
 
 
 def run():
-    app.run(debug=True, use_reloader=False, port=8000)
+    app.run(host='0.0.0.0',debug=True, port=8000)
 
 
 # Use to run function at start of flask server
@@ -15,11 +15,11 @@ with app.app_context():
 
     # Get the status of all lockios from the server
     def getLockiosStatus():
-        response = requests.get(const.BACK_URL)
+        response = requests.get(const.BACK_URL + "/api/lockio/1/")
         return response.json()
 
     # TODO GET INFO FOR EACH LOCKIOS AND LIGHT THE LEDS WITH THEIR CORRECT STATUS
-    getLockiosStatus()
+    # getLockiosStatus()
     ledsOn()
 
 if __name__ == '__main__':

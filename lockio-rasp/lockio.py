@@ -1,12 +1,12 @@
 from gpiozero import LED
 from gpiozero.pins.pigpio import PiGPIOFactory
-
+from const.const import RASPBERRY_IP
 
 class Lockio:
 
     def __init__(self, id, redGPIOPin, greenGPIOPin):
         # only needed when testing remotely (when the server is not on raspberry)
-        raspberry = PiGPIOFactory(host='192.168.1.64')
+        raspberry = PiGPIOFactory(host=RASPBERRY_IP)
 
         self.id = id
         self.greenLED = LED(greenGPIOPin, pin_factory=raspberry)
