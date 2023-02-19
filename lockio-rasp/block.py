@@ -1,6 +1,5 @@
 from lockio import Lockio
 
-
 class Block:
 
     def __init__(self, id):
@@ -17,15 +16,15 @@ class Block:
     def switchOnAll(self, color):
         if color == "green":
             for lockio in self.lockios:
-                lockio.switchOn(lockio.greenLED)
+                lockio.switchOn(lockio.green)
         elif color == "red":
             for lockio in self.lockios:
-                lockio.switchOn(lockio.redLED)
+                lockio.switchOn(lockio.red)
 
     def switchOffAll(self, color):
         if color == "green":
             for lockio in self.lockios:
-                lockio.switchOff(lockio.greenLED)
+                lockio.switchOff(lockio.green)
         elif color == "red":
             for lockio in self.lockios:
-                lockio.switchOff(lockio.redLED)
+                lockio.switchOff(lockio.red)
