@@ -15,11 +15,11 @@ with app.app_context():
 
     # Get the status of all lockios from the server
     def getLockiosStatus():
-        response = requests.get(const.BACK_URL + "/api/lockio/1/")
+        response = requests.get(const.BACK_URL + "api/lockio/1/")
         return response.json()
 
     # TODO GET INFO FOR EACH LOCKIOS AND LIGHT THE LEDS WITH THEIR CORRECT STATUS
-    # getLockiosStatus()
+    print(getLockiosStatus())
     ledsOn()
 
 if __name__ == '__main__':
