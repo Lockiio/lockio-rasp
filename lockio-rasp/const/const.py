@@ -1,1 +1,1 @@
-BACK_URL = "http://host.docker.internal:8080/"
+BACK_URL = "http://localhost:8080/"

@@ -7,7 +7,7 @@ app = Flask(__name__, instance_relative_config=True)
 
 
 def run():
-    app.run(host='0.0.0.0',debug=True, port=8000)
+    app.run(host='0.0.0.0',debug=True)
 
 
 # Use to run function at start of flask server
