@@ -1,6 +1,4 @@
-
-
-class Lockio:
+class LockioCase:
     mapLockio = {}
     listeLockio=[]
 
@@ -11,19 +9,18 @@ class Lockio:
         self.local_id=local_id;
         self.size = size
         self.status = status
-        Lockio.mapLockio[id] = self;
-        Lockio.listeLockio.append(self);
+        LockioCase.mapLockio[id] = self;
+        LockioCase.listeLockio.append(self);
 
 
     @staticmethod
     def getListeLockio():
-        return Lockio.listeLockio;
+        return LockioCase.listeLockio;
 
     @staticmethod
     def getLockio(id: int):
-        if id in Lockio.mapLockio:
-            return (Lockio.mapLockio[id])
+        if id in LockioCase.mapLockio:
+            return (LockioCase.mapLockio[id])
         else:
             raise ValueError("pas de lockio avec id=" + id + " existant");
-
 
