@@ -1,9 +1,12 @@
 class Lockio:
 
-    def __init__(self, id):
+    def __init__(self,id,block_id,local_id,size,status):
         self.id = id
-        self.green = False
-        self.red = False
+        self.status = status
+        self.block_id = block_id
+        self.local_id = local_id
+        self.size = size
+        self.status = status
 
     def switchOn(self, led):
         if led == self.green:

@@ -1,5 +1,6 @@
 from lockio import Lockio
 
+
 class Block:
 
     def __init__(self, id):
@@ -28,3 +29,12 @@ class Block:
         elif color == "red":
             for lockio in self.lockios:
                 lockio.switchOff(lockio.red)
+
+    def getLockio(self, id: int):
+        for lockio in self.lockios:
+            if lockio.id == id:
+                return lockio
+        raise ValueError("Pas de lockio avec id=" + str(id) + " existant");
+
+    def getLockios(self):
+        return self.lockios
