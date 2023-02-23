@@ -1,10 +1,9 @@
 class Lockio:
 
-    def __init__(self,id,block_id,local_id,size,status):
+    def __init__(self, id, localId, size, status, blockId):
         self.id = id
-        self.status = status
-        self.block_id = block_id
-        self.local_id = local_id
+        self.blockId = blockId
+        self.localId = localId
         self.size = size
         self.status = status
 
