@@ -40,11 +40,13 @@ if __name__ == '__main__':
 route = "/api/rasp/1/lockios/"
 
 
+# GET unique Lockio
 @app.route(route + '<int:lockio_id>')
 def getLockio(lockio_id):
     return jsonify(vars(block.getLockio(lockio_id))), 200
 
 
+# PATCH status of a Lockio
 @app.route(route + '<int:lockio_id>', methods=['PATCH'])
 def patchLockio(lockio_id):
     lockio = block.getLockio(lockio_id)
@@ -54,11 +56,11 @@ def patchLockio(lockio_id):
     return jsonify(vars(lockio)), 200
 
 
+# GET all Lockios
 @app.route(route, methods=['GET'])
 def getAllLockios():
     lockios = block.getLockios()
     lockios_json = []
     for lockio in lockios:
         lockios_json.append(vars(lockio))
-    print(lockios_json)
     return lockios_json, 200
