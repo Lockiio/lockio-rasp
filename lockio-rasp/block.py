@@ -14,21 +14,21 @@ class Block:
         for lockio in lockers:
             self.addLockio(lockio)
 
-    def switchOnAll(self, color):
-        if color == "green":
-            for lockio in self.lockios:
-                lockio.switchOn(lockio.green)
-        elif color == "red":
-            for lockio in self.lockios:
-                lockio.switchOn(lockio.red)
-
-    def switchOffAll(self, color):
-        if color == "green":
-            for lockio in self.lockios:
-                lockio.switchOff(lockio.green)
-        elif color == "red":
-            for lockio in self.lockios:
-                lockio.switchOff(lockio.red)
+    # def switchOnAll(self, color):
+    #     if color == "green":
+    #         for lockio in self.lockios:
+    #             lockio.switchOn(lockio.green)
+    #     elif color == "red":
+    #         for lockio in self.lockios:
+    #             lockio.switchOn(lockio.red)
+    #
+    # def switchOffAll(self, color):
+    #     if color == "green":
+    #         for lockio in self.lockios:
+    #             lockio.switchOff(lockio.green)
+    #     elif color == "red":
+    #         for lockio in self.lockios:
+    #             lockio.switchOff(lockio.red)
 
     def getLockio(self, id: int):
         for lockio in self.lockios:
