@@ -14,18 +14,27 @@ class Block:
         for lockio in lockers:
             self.addLockio(lockio)
 
-    def switchOnAll(self, color):
-        if color == "green":
-            for lockio in self.lockios:
-                lockio.switchOn(lockio.greenLED)
-        elif color == "red":
-            for lockio in self.lockios:
-                lockio.switchOn(lockio.redLED)
+    # def switchOnAll(self, color):
+    #     if color == "green":
+    #         for lockio in self.lockios:
+    #             lockio.switchOn(lockio.green)
+    #     elif color == "red":
+    #         for lockio in self.lockios:
+    #             lockio.switchOn(lockio.red)
+    #
+    # def switchOffAll(self, color):
+    #     if color == "green":
+    #         for lockio in self.lockios:
+    #             lockio.switchOff(lockio.green)
+    #     elif color == "red":
+    #         for lockio in self.lockios:
+    #             lockio.switchOff(lockio.red)
 
-    def switchOffAll(self, color):
-        if color == "green":
-            for lockio in self.lockios:
-                lockio.switchOff(lockio.greenLED)
-        elif color == "red":
-            for lockio in self.lockios:
-                lockio.switchOff(lockio.redLED)
+    def getLockio(self, id: int):
+        for lockio in self.lockios:
+            if lockio.id == id:
+                return lockio
+        raise ValueError("Pas de lockio avec id=" + str(id) + " existant");
+
+    def getLockios(self):
+        return self.lockios
