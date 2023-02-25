@@ -26,7 +26,7 @@ with app.app_context():
     block = Block(block_id)
     block.addLockios([lockio1, lockio2, lockio3, lockio4, lockio5, lockio6, lockio7, lockio8])
     # Get the status of all lockios from the server
-    response = requests.get(const.BACK_URL + "api/lockio/1/")
+    response = requests.get(const.BACK_URL + "api/lockio/1/blocks")
 
     # Uncomment the line below and comment the line above
     # to use the docker url on the N blocks from our Docker image
