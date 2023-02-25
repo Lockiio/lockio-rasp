@@ -28,6 +28,10 @@ with app.app_context():
     # Get the status of all lockios from the server
     response = requests.get(const.BACK_URL + "api/lockio/1/")
 
+    # Uncomment the line below and comment the line above
+    # to use the docker url on the N blocks from our Docker image
+    # response = requests.get(const.DOCKER_URL + "api/lockio/1/")
+
     # TODO GET INFO FOR EACH LOCKIOS AND LIGHT THE LEDS WITH THEIR CORRECT STATUS
     print(response.json())
 
