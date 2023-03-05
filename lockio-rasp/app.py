@@ -54,9 +54,7 @@ def getLockio(lockio_id):
 @app.route(route + '<int:lockio_id>', methods=['PATCH'])
 def patchLockio(lockio_id):
     lockio = block.getLockio(lockio_id)
-    status = request.json['status']
-    if lockio.status == 'AVAILABLE':
-        lockio.status = status
+    lockio.status = request.json['status']
     return jsonify(vars(lockio)), 200
 
 
