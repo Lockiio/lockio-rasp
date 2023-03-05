@@ -15,14 +15,14 @@ def run():
 with app.app_context():
     # INIT BLOCK AND LOCKIOS
     block_id = 1
-    lockio1 = Lockio(1, 1, "SMALL", "OCCUPIED", block_id)
+    lockio1 = Lockio(1, 1, "SMALL", "AVAILABLE", block_id)
     lockio2 = Lockio(2, 2, "SMALL", "AVAILABLE", block_id)
     lockio3 = Lockio(3, 3, "MEDIUM", "AVAILABLE", block_id)
     lockio4 = Lockio(4, 4, "MEDIUM", "AVAILABLE", block_id)
-    lockio5 = Lockio(5, 5, "MEDIUM", "OCCUPIED", block_id)
-    lockio6 = Lockio(6, 6, "MEDIUM", "OCCUPIED", block_id)
-    lockio7 = Lockio(7, 7, "LARGE", "DISABLED", block_id)
-    lockio8 = Lockio(8, 8, "LARGE", "DISABLED", block_id)
+    lockio5 = Lockio(5, 5, "MEDIUM", "AVAILABLE", block_id)
+    lockio6 = Lockio(6, 6, "MEDIUM", "AVAILABLE", block_id)
+    lockio7 = Lockio(7, 7, "LARGE", "AVAILABLE", block_id)
+    lockio8 = Lockio(8, 8, "LARGE", "AVAILABLE", block_id)
     block = Block(block_id)
     block.addLockios([lockio1, lockio2, lockio3, lockio4, lockio5, lockio6, lockio7, lockio8])
     # Get the status of all lockios from the server
