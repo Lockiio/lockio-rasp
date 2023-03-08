@@ -1,11 +1,34 @@
-class Lockio:
+from flask_sqlalchemy import SQLAlchemy
 
-    def __init__(self, id, localId, size, status, blockId):
+db = SQLAlchemy()
+
+class Lockio(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    local_id = db.Column(db.Integer)
+    size = db.Column(db.String(20))
+    status = db.Column(db.String(20))
+    block_id = db.Column(db.Integer, db.ForeignKey('block.id'))
+
+
+
+    def __init__(self, id, local_id, size, status, block_id):
         self.id = id
-        self.blockId = blockId
-        self.localId = localId
+        self.block_id = block_id
+        self.local_id = local_id
         self.size = size
         self.status = status
+
+    @staticmethod
+    def serialize(obj):
+        if isinstance(obj, Lockio):
+            return {
+                'id': obj.id,
+                'block_id': obj.block_id,
+                'local_id': obj.local_id,
+                'size': obj.size,
+                'status': obj.status,
+            }
+        return obj
 
     # def switchOn(self, led):
     #     if led == self.green:

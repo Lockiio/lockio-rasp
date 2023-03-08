@@ -3,8 +3,12 @@ import const.const as const
 from flask import *
 from lockio import Lockio
 from block import Block
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, instance_relative_config=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://dev:password@localhost/lockio"
+db = SQLAlchemy(app)
+
 
 
 def run():
@@ -13,18 +17,20 @@ def run():
 
 # Use to run function at start of flask server
 with app.app_context():
-    # INIT BLOCK AND LOCKIOS
-    block_id = 1
-    lockio1 = Lockio(1, 1, "SMALL", "AVAILABLE", block_id)
-    lockio2 = Lockio(2, 2, "SMALL", "AVAILABLE", block_id)
-    lockio3 = Lockio(3, 3, "MEDIUM", "AVAILABLE", block_id)
-    lockio4 = Lockio(4, 4, "MEDIUM", "AVAILABLE", block_id)
-    lockio5 = Lockio(5, 5, "MEDIUM", "AVAILABLE", block_id)
-    lockio6 = Lockio(6, 6, "MEDIUM", "AVAILABLE", block_id)
-    lockio7 = Lockio(7, 7, "LARGE", "AVAILABLE", block_id)
-    lockio8 = Lockio(8, 8, "LARGE", "AVAILABLE", block_id)
-    block = Block(block_id)
-    block.addLockios([lockio1, lockio2, lockio3, lockio4, lockio5, lockio6, lockio7, lockio8])
+
+    lockios= db.session.query(Lockio).filter(Lockio.block_id == 1)
+    #block_data=db.session.query(Block).filter(id == 1)
+    block=Block(1)
+    for lockio in lockios:
+        lockio_instance = Lockio(
+            id=lockio.id,
+            block_id=lockio.block_id,
+            local_id=lockio.local_id,
+            size=lockio.size,
+            status=lockio.status
+        )
+        block.addLockio(lockio_instance)
+
     # Get the status of all lockios from the server
     response = requests.get(const.BACK_URL + "api/lockio/1/")
 
@@ -47,7 +53,7 @@ route = "/api/rasp/1/lockios/"
 # GET unique Lockio
 @app.route(route + '<int:lockio_id>')
 def getLockio(lockio_id):
-    return jsonify(vars(block.getLockio(lockio_id))), 200
+    return jsonify(Lockio.serialize(block.getLockio(lockio_id))), 200
 
 
 # PATCH status of a Lockio
@@ -55,7 +61,7 @@ def getLockio(lockio_id):
 def patchLockio(lockio_id):
     lockio = block.getLockio(lockio_id)
     lockio.status = request.json['status']
-    return jsonify(vars(lockio)), 200
+    return jsonify(Lockio.serialize(lockio)), 200
 
 
 # GET all Lockios
@@ -64,5 +70,5 @@ def getAllLockios():
     lockios = block.getLockios()
     lockios_json = []
     for lockio in lockios:
-        lockios_json.append(vars(lockio))
+        lockios_json.append(Lockio.serialize(lockio))
     return lockios_json, 200

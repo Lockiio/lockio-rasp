@@ -1,7 +1,12 @@
+from flask_sqlalchemy import SQLAlchemy
 from lockio import Lockio
 
+db = SQLAlchemy()
 
-class Block:
+class Block(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    lockio_id = db.Column(db.Integer, db.ForeignKey('lockio.id'))
 
     def __init__(self, id):
         self.id = id
