@@ -14,17 +14,21 @@ def run():
 # Use to run function at start of flask server
 with app.app_context():
     # INIT BLOCK AND LOCKIOS
-    block_id = 1
-    lockio1 = Lockio(1, 1, "SMALL", "AVAILABLE", block_id)
-    lockio2 = Lockio(2, 2, "SMALL", "AVAILABLE", block_id)
-    lockio3 = Lockio(3, 3, "MEDIUM", "AVAILABLE", block_id)
-    lockio4 = Lockio(4, 4, "MEDIUM", "AVAILABLE", block_id)
-    lockio5 = Lockio(5, 5, "MEDIUM", "AVAILABLE", block_id)
-    lockio6 = Lockio(6, 6, "MEDIUM", "AVAILABLE", block_id)
-    lockio7 = Lockio(7, 7, "LARGE", "AVAILABLE", block_id)
-    lockio8 = Lockio(8, 8, "LARGE", "AVAILABLE", block_id)
-    block = Block(block_id)
-    block.addLockios([lockio1, lockio2, lockio3, lockio4, lockio5, lockio6, lockio7, lockio8])
+    block_id=1
+    data_block=requests.get(const.BACK_URL+"api/lockio/1/blocks/"+str(block_id)).json()
+    data_lockio=requests.get(const.BACK_URL+"api/lockio/1/blocks/"+str(block_id)+"/lockios/local").json()
+    block= Block(data_block['id'])
+    lockios = []
+
+    for item in data_lockio:
+        lockio_id = item["id"]
+        lockio_localId = item["localId"]
+        lockio_size = item["size"]
+        lockio_status = item["status"]
+        lockio = Lockio(lockio_id, lockio_localId, lockio_size, lockio_status,block_id)
+        lockios.append(lockio)
+
+    block.addLockios(lockios)
     # Get the status of all lockios from the server
     response = requests.get(const.BACK_URL + "api/lockio/1/")
 
@@ -42,7 +46,6 @@ if __name__ == '__main__':
 # ROUTES
 ########
 route = "/api/rasp/1/lockios/"
-
 
 # GET unique Lockio
 @app.route(route + '<int:lockio_id>')
