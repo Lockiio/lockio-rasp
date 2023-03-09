@@ -21,23 +21,11 @@ with app.app_context():
     lockios = []
 
     for item in data_lockio:
-        lockio_id = item["id"]
-        lockio_localId = item["localId"]
-        lockio_size = item["size"]
-        lockio_status = item["status"]
-        lockio = Lockio(lockio_id, lockio_localId, lockio_size, lockio_status,block_id)
+        lockio = Lockio(item["id"],  item["localId"],item["size"], item["status"],block_id)
         lockios.append(lockio)
 
     block.addLockios(lockios)
-    # Get the status of all lockios from the server
-    response = requests.get(const.BACK_URL + "api/lockio/1/")
 
-    # Uncomment the line below and comment the line above
-    # to use the docker url on the N blocks from our Docker image
-    # response = requests.get(const.DOCKER_URL + "api/lockio/1/")
-
-    # TODO GET INFO FOR EACH LOCKIOS AND LIGHT THE LEDS WITH THEIR CORRECT STATUS
-    print(response.json())
 
 if __name__ == '__main__':
     run()
