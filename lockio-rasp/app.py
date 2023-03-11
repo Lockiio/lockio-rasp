@@ -26,7 +26,6 @@ with app.app_context():
 
     block.addLockios(lockios)
 
-
 if __name__ == '__main__':
     run()
 
