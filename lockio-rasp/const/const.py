@@ -1,2 +1,2 @@
-BACK_URL = "http://127.0.0.1:8080/"
-RASPBERRY_IP = "192.168.1.35"
+BACK_URL = "http://localhost:8080/"
+DOCKER_URL = "http://host.docker.internal:8080/"

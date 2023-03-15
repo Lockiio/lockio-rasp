@@ -4,11 +4,15 @@ from const.const import RASPBERRY_IP
 
 class Lockio:
 
-    def __init__(self, id, redGPIOPin, greenGPIOPin):
+    def __init__(self, id, localId, size, status, blockId, redGPIOPin, greenGPIOPin):
+        self.id = id
+        self.blockId = blockId
+        self.localId = localId
+        self.size = size
+        self.status = status
+
         # only needed when testing remotely (when the server is not on raspberry)
         raspberry = PiGPIOFactory(host=RASPBERRY_IP)
-
-        self.id = id
         self.greenLED = LED(greenGPIOPin, pin_factory=raspberry)
         self.redLED = LED(redGPIOPin, pin_factory=raspberry)
 
