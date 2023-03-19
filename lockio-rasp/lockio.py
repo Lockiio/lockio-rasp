@@ -1,6 +1,5 @@
 from gpiozero import LED
-from gpiozero.pins.pigpio import PiGPIOFactory
-from const.const import RASPBERRY_IP
+
 
 class Lockio:
 
@@ -11,10 +10,25 @@ class Lockio:
         self.size = size
         self.status = status
 
+        self.redGPIOPin = redGPIOPin
+        self.greenGPIOPin = greenGPIOPin
+
         # only needed when testing remotely (when the server is not on raspberry)
-        raspberry = PiGPIOFactory(host=RASPBERRY_IP)
-        self.greenLED = LED(greenGPIOPin, pin_factory=raspberry)
-        self.redLED = LED(redGPIOPin, pin_factory=raspberry)
+        self.greenLED = LED(greenGPIOPin)
+        self.redLED = LED(redGPIOPin)
+
+    def updateLed(self):
+        if self.status == "AVAILABLE":
+            self.switchOn(self.greenLED)
+            self.switchOff(self.redLED)
+        elif self.status == "OCCUPIED":
+            self.switchOn(self.redLED)
+            self.switchOff(self.greenLED)
+        elif self.status == "PRERESERVED":
+            self.switchOn(self.redLED)
+            self.switchOn(self.greenLED)
+        else:
+            self.switchOffAll()
 
     def switchOn(self, led):
         if led == self.greenLED:
