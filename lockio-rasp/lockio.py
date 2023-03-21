@@ -1,6 +1,5 @@
 from gpiozero import LED
 
-
 class Lockio:
 
     def __init__(self, id, localId, size, status, blockId, redGPIOPin, greenGPIOPin):
@@ -13,7 +12,6 @@ class Lockio:
         self.redGPIOPin = redGPIOPin
         self.greenGPIOPin = greenGPIOPin
 
-        # only needed when testing remotely (when the server is not on raspberry)
         self.greenLED = LED(greenGPIOPin)
         self.redLED = LED(redGPIOPin)
 

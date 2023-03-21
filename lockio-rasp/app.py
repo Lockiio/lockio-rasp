@@ -15,8 +15,8 @@ def run():
 with app.app_context():
     # INIT BLOCK AND LOCKIOS
     block_id = 1
-    data_block = requests.get(const.DOCKER_URL + "api/lockio/1/blocks/" + str(block_id)).json()
-    data_lockio = requests.get(const.DOCKER_URL + "api/lockio/1/blocks/" + str(block_id) + "/lockios/local").json()
+    data_block = requests.get(const.BACK_URL + "api/lockio/1/blocks/" + str(block_id)).json()
+    data_lockio = requests.get(const.BACK_URL + "api/lockio/1/blocks/" + str(block_id) + "/lockios/local").json()
     block = Block(data_block['id'])
     lockios = []
 
