@@ -1,4 +1,7 @@
 from gpiozero import LED
+from gpiozero.pins.pigpio import PiGPIOFactory
+
+import const.const as const
 
 class Lockio:
 
@@ -12,8 +15,9 @@ class Lockio:
         self.redGPIOPin = redGPIOPin
         self.greenGPIOPin = greenGPIOPin
 
-        self.greenLED = LED(greenGPIOPin)
-        self.redLED = LED(redGPIOPin)
+        self.raspberry = PiGPIOFactory(host=const.RASPBERRY_URL)
+        self.greenLED = LED(greenGPIOPin,pin_factory=self.raspberry)
+        self.redLED = LED(redGPIOPin,pin_factory=self.raspberry)
 
     def updateLed(self):
         if self.status == "AVAILABLE":
